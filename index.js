@@ -14,7 +14,7 @@ menu = () => {
                 choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Exit"]
             }
         ])
-        .then((operation) => {
+        .then(({ operation }) => {
             console.log(operation);
 
             switch (operation) {
