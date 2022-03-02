@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
+const connections = require('./db/connection');
+
 
 //beginning prompt
 menu = () => {
@@ -21,6 +23,7 @@ menu = () => {
 
                 case "View all departments":
                     console.log(1);
+                    viewDepartments();
                     break;
                 
                 case "View all roles":
@@ -57,5 +60,9 @@ menu = () => {
 
 }
 
+function viewDepartments() {
+    connections.allDepartments
+    
+};
 
 menu();
