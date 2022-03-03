@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const db = require('./db');
+const db = require('./db/connection');
+const { allDepartments, connection } = require('./db/fornow');
 
 
 //beginning prompt
@@ -23,7 +24,8 @@ menu = () => {
 
                 case "View all departments":
                     console.log(1);
-                    allDepartments();
+                    allTheDepartments();
+                    menu();
                     break;
                 
                 case "View all roles":
@@ -60,8 +62,10 @@ menu = () => {
 
 }
 
-function allDepartments() {
-    db
+function allTheDepartments() {
+    console.log('Keep pushing, youre doing great')
+    return allDepartments();
+    
     
 };
 
