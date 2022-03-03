@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const db = require('./db/connection');
-const { allDepartments, connection } = require('./db/fornow');
+const db = require('./db');
+require('console.table')
 
 
 //beginning prompt
@@ -25,19 +25,20 @@ menu = () => {
                 case "View all departments":
                     console.log(1);
                     allTheDepartments();
-                    menu();
                     break;
                 
                 case "View all roles":
                     console.log(2);
+                    allTheRoles();
                     break;
                 
                 case "View all employees":
                     console.log(3);
+                    allTheEmployees();
                     break;
                 
                 case "Add a department":
-                    console.log(4);
+                    // createDepartment();
                     break;
                 
                 case "Add a role":
@@ -64,9 +65,73 @@ menu = () => {
 
 function allTheDepartments() {
     console.log('Keep pushing, youre doing great')
-    return allDepartments();
+    db.allDepartments()
+        .then(([rows]) => {
+            let departments = rows;
+            console.log("\n");
+            console.table(departments);
+            
+        }).then(() => menu())
     
     
 };
+
+// function createDepartment() {
+//     inquirer
+//         .prompt([
+//         {
+//             name: "name",
+//             message: "What is the name of the new department?"
+
+//         }
+//     ]).then(res => {
+//         let newDepartment = res;
+//         db.addDepartment(newDepartment)
+//             .then(() => menu())
+//     })
+//     }
+
+
+
+function allTheRoles() {
+    console.log('Keep pushing, youre doing great')
+    db.allRoles()
+        .then(([rows]) => {
+            let roles = rows;
+            console.log("\n");
+            console.table(roles);
+
+        }).then(() => menu())
+
+
+};
+
+
+function allTheEmployees() {
+    console.log('Keep pushing, youre doing great')
+    db.allEmployees()
+        .then(([rows]) => {
+            let employees = rows;
+            console.log("\n");
+            console.table(employees);
+
+        }).then(() => menu())
+
+
+};
+
+function allTheEmployees() {
+    console.log('Keep pushing, youre doing great')
+    db.allEmployees()
+        .then(([rows]) => {
+            let employees = rows;
+            console.log("\n");
+            console.table(employees);
+
+        }).then(() => menu())
+
+
+};
+
 
 menu();
