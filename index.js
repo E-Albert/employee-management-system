@@ -23,17 +23,14 @@ menu = () => {
             switch (operation) {
 
                 case "View all departments":
-                    console.log(1);
                     allTheDepartments();
                     break;
                 
                 case "View all roles":
-                    console.log(2);
                     allTheRoles();
                     break;
                 
                 case "View all employees":
-                    console.log(3);
                     allTheEmployees();
                     break;
                 
@@ -64,7 +61,7 @@ menu = () => {
 }
 
 function allTheDepartments() {
-    console.log('Keep pushing, youre doing great')
+    
     db.allDepartments()
         .then(([rows]) => {
             let departments = rows;
@@ -94,7 +91,7 @@ function allTheDepartments() {
 
 
 function allTheRoles() {
-    console.log('Keep pushing, youre doing great')
+   
     db.allRoles()
         .then(([rows]) => {
             let roles = rows;
