@@ -25,31 +25,31 @@ menu = () => {
                 case "View all departments":
                     allTheDepartments();
                     break;
-                
+
                 case "View all roles":
                     allTheRoles();
                     break;
-                
+
                 case "View all employees":
                     allTheEmployees();
                     break;
-                
+
                 case "Add a department":
-                    // createDepartment();
+                    createDepartment();
                     break;
-                
+
                 case "Add a role":
-                    console.log(5);
+                    // createRole();
                     break;
-                
+
                 case "Add an employee":
                     console.log(6);
                     break;
-                
+
                 case "Update an employee role":
                     console.log(7);
                     break;
-            
+
                 default:
                     break;
             }
@@ -61,37 +61,38 @@ menu = () => {
 }
 
 function allTheDepartments() {
-    
+
     db.allDepartments()
         .then(([rows]) => {
             let departments = rows;
             console.log("\n");
             console.table(departments);
-            
+
         }).then(() => menu())
-    
-    
+
+
 };
 
-// function createDepartment() {
-//     inquirer
-//         .prompt([
-//         {
-//             name: "name",
-//             message: "What is the name of the new department?"
+function createDepartment() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the name of the new department?"
 
-//         }
-//     ]).then(res => {
-//         let newDepartment = res;
-//         db.addDepartment(newDepartment)
-//             .then(() => menu())
-//     })
-//     }
+            }
+        ]).then(res => {
+            let newDepartment = res;
+            db.addDepartment(newDepartment)
+                .then(() => menu())
+        })
+}
 
 
 
 function allTheRoles() {
-   
+
     db.allRoles()
         .then(([rows]) => {
             let roles = rows;
@@ -103,6 +104,40 @@ function allTheRoles() {
 
 };
 
+// function createRole() {
+    
+//     db.allDepartments()
+//         .then(([rows]) => {
+//             let departments = rows;
+//             console.log(departments);
+
+//             inquirer
+//                 .prompt([
+//                     {
+//                         type: "input",
+//                         name: "name",
+//                         message: "What is the name of the role?"
+//                     },
+//                     {
+//                         type: "input",
+//                         name: "salary",
+//                         message: "What is your salary?"
+//                     },
+//                     {
+//                         type: "list",
+//                         name: "department",
+//                         message: "What is the name of the department?",
+//                         choices: departments
+
+//                     }
+//                 ]).then(({name, salary, department }) => {
+//                     console.log(name, salary, department);
+//                     let departmentId = department;
+//                     departmentId = 
+//                 })
+//         })
+// }
+    
 
 function allTheEmployees() {
     console.log('Keep pushing, youre doing great')
