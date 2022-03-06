@@ -30,9 +30,9 @@ class DB  {
             
         );
     }
-    addRoles(name, salary, department) {
+    addRoles(name, salary, id) {
         return this.connection.promise().query(
-       
+            'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [name, salary, id]
     );
 }
 

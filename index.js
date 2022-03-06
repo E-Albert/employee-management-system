@@ -39,7 +39,7 @@ menu = () => {
                     break;
 
                 case "Add a role":
-                    // createRole();
+                    createRole();
                     break;
 
                 case "Add an employee":
@@ -85,6 +85,8 @@ function createDepartment() {
         ]).then(res => {
             let newDepartment = res;
             db.addDepartment(newDepartment)
+                .then(() =>
+                    console.log(`New department added.`))
                 .then(() => menu())
         })
 }
@@ -104,40 +106,46 @@ function allTheRoles() {
 
 };
 
-// function createRole() {
-    
-//     db.allDepartments()
-//         .then(([rows]) => {
-//             let departments = rows;
-//             console.log(departments);
+function createRole() {
 
-//             inquirer
-//                 .prompt([
-//                     {
-//                         type: "input",
-//                         name: "name",
-//                         message: "What is the name of the role?"
-//                     },
-//                     {
-//                         type: "input",
-//                         name: "salary",
-//                         message: "What is your salary?"
-//                     },
-//                     {
-//                         type: "list",
-//                         name: "department",
-//                         message: "What is the name of the department?",
-//                         choices: departments
+    db.allDepartments()
+        .then(([rows]) => {
+            let departments = rows;
+            console.log(departments);
 
-//                     }
-//                 ]).then(({name, salary, department }) => {
-//                     console.log(name, salary, department);
-//                     let departmentId = department;
-//                     departmentId = 
-//                 })
-//         })
-// }
-    
+            inquirer
+                .prompt([
+                    {
+                        type: "input",
+                        name: "id",
+                        message: "What is the id of the department?"
+
+
+                    },
+                    {
+                        type: "input",
+                        name: "name",
+                        message: "What is the name of the role?"
+                    },
+                    {
+                        type: "input",
+                        name: "salary",
+                        message: "What is salary for the role?"
+                    }
+                ])
+
+                .then(({ name, salary, id }) => {
+                    console.log(name, salary, id);
+                    db.addRoles(name, salary, id);
+                    console.log(`Role added.`)
+                })
+
+
+
+                .then(() => menu())
+        })
+}
+
 
 function allTheEmployees() {
     console.log('Keep pushing, youre doing great')
