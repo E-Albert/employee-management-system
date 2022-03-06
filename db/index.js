@@ -54,9 +54,9 @@ class DB  {
         );
     }
 
-    updateEmployee() {
+    updateEmployee(position, manager_id) {
         return this.connection.promise.query(
-            
+            'UPDATE employee SET role_id = ?, manager_id = ? WHERE role_id = ?, manager_id = ?'[position, manager_id]
            
         );
     }

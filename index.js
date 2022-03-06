@@ -46,7 +46,7 @@ menu = () => {
                     break;
 
                 case "Update an employee role":
-                    console.log(7);
+                    // updateAnEmployee();
                     break;
 
                 default:
@@ -202,6 +202,25 @@ function createEmployee() {
                 }).then(() => menu())
         })
 }
+
+// function updateAnEmployee() {
+
+//     db.allEmployees()
+//         .then(([rows]) => {
+//             let employees = rows;
+//             console.log("\n");
+//             console.table(employees);
+
+//             inquirer
+//                 .prompt([
+//                     {
+                      
+//                     }
+//                 ])
+            
+//         })
+
+// }
 
 
 menu();
