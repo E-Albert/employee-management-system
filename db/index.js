@@ -17,10 +17,22 @@ class DB  {
         );
     }
 
+    onlyRoles() {
+        return this.connection.promise().query(
+            'SELECT id, title as role FROM role',
+        );
+    }
+
     allEmployees() {
         return this.connection.promise().query(
             // 'SELECT employee.id, CONCAT(first_name, " ", last_name) AS name, role.title as role, manager_id as manager FROM employee LEFT JOIN role ON employee.role_id = role.id'
             'SELECT employee.id, CONCAT(employee.first_name, " ", employee.last_name) AS name, department.name AS department,  role.title as role, role.salary, CONCAT(manager.first_name, " ",manager.last_name) as manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON employee.manager_id = manager.id'
+        );
+    }
+
+    onlyManagers() {
+        return this.connection.promise().query(
+            'SELECT id,  CONCAT(employee.first_name, " ", employee.last_name) AS name FROM employee WHERE manager_id IS NULL',
         );
     }
 
@@ -36,9 +48,9 @@ class DB  {
     );
 }
 
-    addEmployee() {
+    addEmployee(firstName, lastName, position, manager) {
         return this.connection.promise().query(
-           
+           'INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [firstName, lastName, position, manager] 
         );
     }
 

@@ -18,7 +18,6 @@ menu = () => {
             }
         ])
         .then(({ operation }) => {
-            console.log(operation);
 
             switch (operation) {
 
@@ -43,7 +42,7 @@ menu = () => {
                     break;
 
                 case "Add an employee":
-                    console.log(6);
+                    createEmployee();
                     break;
 
                 case "Update an employee role":
@@ -148,7 +147,7 @@ function createRole() {
 
 
 function allTheEmployees() {
-    console.log('Keep pushing, youre doing great')
+    
     db.allEmployees()
         .then(([rows]) => {
             let employees = rows;
@@ -160,18 +159,49 @@ function allTheEmployees() {
 
 };
 
-function allTheEmployees() {
-    console.log('Keep pushing, youre doing great')
-    db.allEmployees()
+
+function createEmployee() {
+    
+    db.onlyManagers()
         .then(([rows]) => {
-            let employees = rows;
-            console.log("\n");
-            console.table(employees);
+            let roles = rows;
+            console.table(roles);
+        })
 
-        }).then(() => menu())
-
-
-};
+    db.onlyRoles()
+        .then(([rows]) => {
+            let roles = rows;
+            console.table(roles);
+            
+            inquirer
+                .prompt([
+                    {
+                        type: "input", 
+                        name: "firstName",
+                        message: "What is your first name?"
+                    },
+                    {
+                        type: "input",
+                        name: "lastName",
+                        message: "What is your last name?"
+                    },
+                    {
+                        type: "input",
+                        name: "position",
+                        message: "What is the id of your role?"
+                    },
+                    {
+                        type: "input",
+                        name: "manager",
+                        message: "What is the id of your manager?"
+                    }
+                ]).then(({ firstName, lastName, position, manager }) => {
+                    console.log(firstName, lastName, position, manager);
+                    db.addEmployee(firstName, lastName, position, manager)
+                    console.log(`Employee added.`)
+                }).then(() => menu())
+        })
+}
 
 
 menu();
