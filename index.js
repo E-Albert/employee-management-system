@@ -150,7 +150,7 @@ function createRole() {
 
 
 function allTheEmployees() {
-    
+
     db.allEmployees()
         .then(([rows]) => {
             let employees = rows;
@@ -164,7 +164,7 @@ function allTheEmployees() {
 
 
 function createEmployee() {
-    
+
     db.onlyManagers()
         .then(([rows]) => {
             let roles = rows;
@@ -175,11 +175,11 @@ function createEmployee() {
         .then(([rows]) => {
             let roles = rows;
             console.table(roles);
-            
+
             inquirer
                 .prompt([
                     {
-                        type: "input", 
+                        type: "input",
                         name: "firstName",
                         message: "What is your first name?"
                     },
@@ -208,15 +208,21 @@ function createEmployee() {
 
 // function updateAnEmployee() {
 
-//     db.onlyRoles()
-//         .then(([rows]) => {
-//             let roles = rows;
-//             console.table(roles);
-//         })
-    
+//     // db.onlyRoles()
+//     //     .then(([rows]) => {
+//     //         let roles = rows;
+//     //         console.table(roles);
+//     //     })
+
 //     db.allEmployees()
-//         .then(([employees]) => {
-//             // let employees = rows;
+//         .then(([rows]) => {
+//             let employees = rows;
+//             let employeeChoices = employees.map(({ id, first_name, last_name }) => ({
+//                 name: `${first_name} ${last_name}`,
+//                 value: id
+//             })
+
+//             )
 //             // console.log("\n");
 //             // console.table(employees);
 
@@ -224,29 +230,37 @@ function createEmployee() {
 //                 .prompt([
 //                     {
 //                         type: "list",
-//                         name: "employee",
+//                         name: "employeeId",
 //                         message: "What employee is being updated?",
-//                         choices: employees                        
+//                         choices: employeeChoices
 //                     },
-//                     {
-//                         type: "input",
-//                         name: "position",
-//                         message: "What is the ID of your new role?"
-//                     },
-//                     {
-//                         type: "input",
-//                         name: "manager_id",
-//                         message: "What is the id of your manager?"
-//                     }
+//                     // {
+//                     //     type: "input",
+//                     //     name: "position",
+//                     //     message: "What is the ID of your new role?"
+//                     // },
+//                     // {
+//                     //     type: "input",
+//                     //     name: "manager_id",
+//                     //     message: "What is the id of your manager?"
+//                     // }
 
-//                 ]).then(({ position, manager_id }) => {
-//                     console.log(position, manager_id);
-//                 }).then(({ employee, position, manager_id }) => {
-//                     db.updateEmployee((employee, position, manager_id))
-//                 })
-            
-//         })
+//                 ]).then(res => {
+//                     let employeeId = res.employeeId
+//                     db.onlyManagers(employeeId)
+//                         .then(([rows]) => {
+//                             let theManagers = rows;
+//                             let managerChoices = theManagers.map(({ id, firstName, lastName }) => ({
+//                                 name: `${firstName} ${lastName}`,
+//                                 value: id
+//                             })
 
+//                             )
+
+//                         })
+//                 });
+//         }
+//         )
 // }
 
 

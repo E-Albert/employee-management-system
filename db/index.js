@@ -54,12 +54,12 @@ class DB  {
         );
     }
 
-    // updateEmployee(employee, position, manager_id) {
-    //     return this.connection.promise.query(
-    //         'UPDATE employee SET first_name =?, last_name = ?, role_id = ?, manager_id = ? WHERE CONCAT(first_name, last_name) = ?, role_id = ?, manager_id = ?'[employee, position, manager_id]
+    updateEmployee(employee, position, manager_id) {
+        return this.connection.promise.query(
+            'UPDATE employee SET first_name =?, last_name = ?, role_id = ?, manager_id = ? WHERE CONCAT(first_name, last_name) = ?, role_id = ?, manager_id = ?'[employee, position, manager_id]
            
-    //     );
-    // }
+        );
+    }
 
 }
 
