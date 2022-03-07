@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
+const { allEmployees, updateEmployee } = require('./db');
 const db = require('./db');
 require('console.table')
 
@@ -50,6 +51,8 @@ menu = () => {
                     break;
 
                 default:
+                    console.log(`Goodbye.`);
+                    process.exit();
                     break;
             }
 
@@ -205,18 +208,42 @@ function createEmployee() {
 
 // function updateAnEmployee() {
 
-//     db.allEmployees()
+//     db.onlyRoles()
 //         .then(([rows]) => {
-//             let employees = rows;
-//             console.log("\n");
-//             console.table(employees);
+//             let roles = rows;
+//             console.table(roles);
+//         })
+    
+//     db.allEmployees()
+//         .then(([employees]) => {
+//             // let employees = rows;
+//             // console.log("\n");
+//             // console.table(employees);
 
 //             inquirer
 //                 .prompt([
 //                     {
-                      
+//                         type: "list",
+//                         name: "employee",
+//                         message: "What employee is being updated?",
+//                         choices: employees                        
+//                     },
+//                     {
+//                         type: "input",
+//                         name: "position",
+//                         message: "What is the ID of your new role?"
+//                     },
+//                     {
+//                         type: "input",
+//                         name: "manager_id",
+//                         message: "What is the id of your manager?"
 //                     }
-//                 ])
+
+//                 ]).then(({ position, manager_id }) => {
+//                     console.log(position, manager_id);
+//                 }).then(({ employee, position, manager_id }) => {
+//                     db.updateEmployee((employee, position, manager_id))
+//                 })
             
 //         })
 

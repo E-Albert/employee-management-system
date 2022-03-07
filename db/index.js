@@ -7,13 +7,13 @@ class DB  {
         
     allDepartments() {
         return this.connection.promise().query(
-            'SELECT * FROM department',
+            'SELECT id as ID, name as Department FROM department',
         );
     }
 
     allRoles() {
         return this.connection.promise().query(
-            'SELECT * FROM role',
+            'SELECT role.id as ID, title as Title, salary as Salary, department.name as Department FROM role LEFT JOIN department ON role.department_id = department.id',
         );
     }
 
@@ -26,7 +26,7 @@ class DB  {
     allEmployees() {
         return this.connection.promise().query(
             // 'SELECT employee.id, CONCAT(first_name, " ", last_name) AS name, role.title as role, manager_id as manager FROM employee LEFT JOIN role ON employee.role_id = role.id'
-            'SELECT employee.id, CONCAT(employee.first_name, " ", employee.last_name) AS name, department.name AS department,  role.title as role, role.salary, CONCAT(manager.first_name, " ",manager.last_name) as manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON employee.manager_id = manager.id'
+            'SELECT employee.id AS ID, CONCAT(employee.first_name, " ", employee.last_name) AS Name, department.name AS Department,  role.title as Role, role.salary AS Salary, CONCAT(manager.first_name, " ",manager.last_name) AS Manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON employee.manager_id = manager.id'
         );
     }
 
@@ -54,12 +54,12 @@ class DB  {
         );
     }
 
-    updateEmployee(position, manager_id) {
-        return this.connection.promise.query(
-            'UPDATE employee SET role_id = ?, manager_id = ? WHERE role_id = ?, manager_id = ?'[position, manager_id]
+    // updateEmployee(employee, position, manager_id) {
+    //     return this.connection.promise.query(
+    //         'UPDATE employee SET first_name =?, last_name = ?, role_id = ?, manager_id = ? WHERE CONCAT(first_name, last_name) = ?, role_id = ?, manager_id = ?'[employee, position, manager_id]
            
-        );
-    }
+    //     );
+    // }
 
 }
 
